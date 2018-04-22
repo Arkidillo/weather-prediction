@@ -3,7 +3,23 @@
 	{% block body %}
 	<div class = "jumbotron text-center">
 		<h1>Predict the Weather in 2017</h1>
-	    <p class="lead">Please Enter a Valid Date in 2017</p>  
+	    <p class="lead">Please select a city and enter a valid date in 2017</p> 
+	    {% from "includes/_formhelpers.html" import render_field %}
+	    <form method="POST" action="">
+
+    		<div class="form-group">
+      			{{ render_field(form.city, class="form-control")}}
+      			
+			</div>
+			<div class="form-group">
+      			{{ render_field(form.date, class="form-control")}}
+      		</div>
+
+			<div class="form-group">
+				{{ form.submit}}
+			</div>
+    	</form>
+
     
 	</div>
 	{% endblock %}
