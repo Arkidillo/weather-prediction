@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+	{% block body %}
+	<div class = "jumbotron text-center">
+		<h1>Predict the Weather in 2017</h1>
+	    <p class="lead">You chose {{city}} and {{date}}. </p> 
+	    {% from "includes/_formhelpers.html" import render_field %}
+	    
+
+    
+	</div>
+	{% endblock %}

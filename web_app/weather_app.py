@@ -12,7 +12,9 @@ def validate_date(date_text):
     try:
         date = datetime.strptime(date_text, '%Y-%m-%d')
         if date.year != 2017:
-        	return 0 
+        	return 0
+        if date.month > 11:
+        	return 0
     except ValueError:
         return 0	
 
@@ -26,10 +28,17 @@ def index():
 		#datetime_object = datetime.strptime(request.form['date'], '%Y-%m-%d')
 			print(request.form['city'])
 			print(request.form['date'])
-			return 'THIS IS A TEST'
+			return render_template('submission.html', city = request.form['city'], date = request.form['date'])
 		else:
 			return render_template('errorindex.html',  form=form)	
 	return render_template('index.html', form=form)
+
+
+
+@app.route('/submission')
+def submission():
+	return render_template('submission.html')
+
 
 if __name__ == '__main__':
     app.secret_key = 'secret12345'
