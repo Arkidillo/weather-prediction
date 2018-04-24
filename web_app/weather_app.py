@@ -1,12 +1,14 @@
 from flask import Flask , render_template, flash, redirect, url_for, request
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators, SelectField
 from datetime import datetime, date, timedelta
-
+import os
 from functools import wraps
 from forms import InputForm
 
 
 app = Flask(__name__)
+
+#dire = os.environ['IMG_DIRECT']
 
 def validate_date(date_text):
     try:
@@ -28,7 +30,11 @@ def index():
 		#datetime_object = datetime.strptime(request.form['date'], '%Y-%m-%d')
 			print(request.form['city'])
 			print(request.form['date'])
-			return render_template('submission.html', city = request.form['city'], date = request.form['date'])
+			city = request.form['city']
+			file = 'images/' + city + '.jpg'
+			
+			#print(full_filename)
+			return render_template('submission.html', city = request.form['city'], date = request.form['date'], city_image = file)
 		else:
 			return render_template('errorindex.html',  form=form)	
 	return render_template('index.html', form=form)

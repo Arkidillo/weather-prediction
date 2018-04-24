@@ -4,6 +4,7 @@
 	<div class = "jumbotron text-center">
 		<h1>Predict the Weather in 2017</h1>
 	    <p class="lead">You chose {{city}} and {{date}}. </p> 
+	    <img src="{{url_for('static', filename=city_image)}}">
 	    {% from "includes/_formhelpers.html" import render_field %}
 	    
 
