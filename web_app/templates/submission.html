@@ -5,6 +5,59 @@
 		<h1>Predict the Weather in 2017</h1>
 	    <p class="lead">You chose {{city}} and {{date}}. </p> 
 	    <img src="{{url_for('static', filename=city_image)}}">
+	    
+	    
+		<br><br>
+		<div class="container">
+				    
+				                
+				    <table class="table table-striped">
+				    	
+				    	
+
+
+
+				    	<tbody>
+				    		<tr>
+				    			<td></td>
+				    			<td><b>Predicted</b></td>
+				    			<td><b>True</b></td>
+				    		</tr>
+				      		<tr>
+					        	<td>Pressure</td>
+					        	<td>{{results[0].get('pressure')}}</td>
+					        	<td>{{results[1].get('pressure')}}</td>
+				      		</tr>
+				      		<tr>
+								<td>Wind Speed</td>
+					        	<td>{{results[0].get('wind_speed')}}</td>
+					        	<td>{{results[1].get('wind_speed')}}</td>
+				      		</tr>
+				      		<tr>
+						        <td>Temperature</td>
+					        	<td>{{results[0].get('temperature')}}</td>
+					        	<td>{{results[1].get('temperature')}}</td>
+				      		</tr>
+				      		<tr>
+					        	<td>Description</td>
+					        	<td>{{results[0].get('converted')}}</td>
+					        	<td>{{results[1].get('converted')}}</td>
+				      		</tr>
+				      		<tr>
+					        	<td>Wind Direction</td>
+					        	<td>{{results[0].get('wind_direction')}}</td>
+					        	<td>{{results[1].get('wind_direction')}}</td>
+				      		</tr>
+				      		<tr>
+					        	<td>Humidity</td>
+					        	<td>{{results[0].get('humidity')}}</td>
+					        	<td>{{results[1].get('humidity')}}</td>
+				      		</tr>
+				      		
+				    	</tbody>
+				  	</table>
+		</div>
+		 
 	    {% from "includes/_formhelpers.html" import render_field %}
 	    
 

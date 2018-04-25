@@ -95,18 +95,21 @@ def predict_all_attrib(city, date):
     
     test_X = test_df.loc[row_index_from_date][:-6].values.reshape(1, -1)
     
-    predicted_attribs = []
-    true_attribs = []
+    predicted_attribs = {}
+    true_attribs = {}
     
+    
+
     for model, attrib in all_models:        
         predicted_attrib = model.predict(test_X)
-        predicted_attribs.append((attrib, predicted_attrib))
+        predicted_attribs[attrib] = round(float(predicted_attrib), 3)
 
         # Index into the global attrib array
         attrib_index = attribs.index(attrib)
         
         true_attrib = get_today_attrib(city, date, attrib_dfs[attrib_index])
-        true_attribs.append((attrib, true_attrib))
+        true_attribs[attrib] = round(true_attrib, 3)
+
         
     return [predicted_attribs, true_attribs]
 
@@ -114,7 +117,6 @@ def predict_all_attrib(city, date):
 
 app = Flask(__name__)
 
-#dire = os.environ['IMG_DIRECT']
 
 def validate_date(date_text):
     try:
@@ -140,8 +142,10 @@ def index():
 			date = request.form['date']
 			file = 'images/' + city + '.jpg'
 			results = predict_all_attrib(city, date)
-			print(results)
-			return render_template('submission.html', city = request.form['city'], date = request.form['date'], city_image = file)
+			print(results[0])
+
+
+			return render_template('submission.html', city = request.form['city'], date = request.form['date'], city_image = file, results = results)
 		else:
 			return render_template('errorindex.html',  form=form)	
 	return render_template('index.html', form=form)
