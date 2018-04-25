@@ -126,7 +126,9 @@ def validate_date(date_text):
         if date.month > 11:
         	return 0
     except ValueError:
-        return 0	
+        return 0
+
+image_cities = ['Nashville', 'Atlanta', 'Tel Aviv District', 'San Francisco']	
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -140,11 +142,14 @@ def index():
 			print(request.form['date'])
 			city = request.form['city']
 			date = request.form['date']
-			file = 'images/' + city + '.jpg'
+
+			if city in image_cities:
+				file = 'images/' + city + '.jpg'
+			else:
+				file = 'images/default.jpg'
+			
 			results = predict_all_attrib(city, date)
-			print(results[0])
-
-
+			
 			return render_template('submission.html', city = request.form['city'], date = request.form['date'], city_image = file, results = results)
 		else:
 			return render_template('errorindex.html',  form=form)	
