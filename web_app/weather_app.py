@@ -102,16 +102,20 @@ def predict_all_attrib(city, date):
 
     for model, attrib in all_models:        
         predicted_attrib = model.predict(test_X)
-        
-        predicted_attribs[attrib] = round(float(predicted_attrib), 3)
+        if attrib == 'temperature':
+        	predicted_attribs[attrib] = round(((float(predicted_attrib)*(9/5))-459.67), 3)
+        else:
+        	predicted_attribs[attrib] = round(float(predicted_attrib), 3)
 
         # Index into the global attrib array
         attrib_index = attribs.index(attrib)
         
         true_attrib = get_today_attrib(city, date, attrib_dfs[attrib_index])
-        true_attribs[attrib] = round(true_attrib, 3)
-
-        
+        if attrib == 'temperature':
+        	true_attribs[attrib] = round(((float(true_attrib)*(9/5))-459.67), 3)
+        else:
+        	true_attribs[attrib] = round(float(true_attrib), 3)
+      
     return [predicted_attribs, true_attribs]
 
 
