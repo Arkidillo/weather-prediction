@@ -102,6 +102,7 @@ def predict_all_attrib(city, date):
 
     for model, attrib in all_models:        
         predicted_attrib = model.predict(test_X)
+        
         predicted_attribs[attrib] = round(float(predicted_attrib), 3)
 
         # Index into the global attrib array

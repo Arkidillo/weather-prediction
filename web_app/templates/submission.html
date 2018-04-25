@@ -9,15 +9,8 @@
 	    
 		<br><br>
 		<div class="container">
-				    
-				                
-				    <table class="table table-striped">
-				    	
-				    	
-
-
-
-				    	<tbody>
+			<table class="table table-striped">
+						<tbody>
 				    		<tr>
 				    			<td></td>
 				    			<td><b>Predicted</b></td>
@@ -55,7 +48,42 @@
 				      		</tr>
 				      		
 				    	</tbody>
-				  	</table>
+			</table>
+			<div class="row">
+			    <div class="col-md-4">
+			      <div class="thumbnail">
+			        <a href="{{url_for('static', filename=city_image)}}" target="_blank">
+			          <img src="{{url_for('static', filename=city_image)}}" alt="Lights" style="width:100%">
+			          <div class="caption">
+			            <p>This is a filler caption. </p>
+			          </div>
+			        </a>
+			      </div>
+			    </div>
+		    <div class="col-md-4">
+		      <div class="thumbnail">
+		        <a href="{{url_for('static', filename=city_image)}}" target="_blank">
+		          <img src="{{url_for('static', filename=city_image)}}" alt="Nature" style="width:100%">
+		          <div class="caption">
+		            <p>This is a filler caption. </p>
+		          </div>
+		        </a>
+		      </div>
+		    </div>
+		    <div class="col-md-4">
+		      <div class="thumbnail">
+		        <a href="{{url_for('static', filename=city_image)}}" target="_blank">
+		          <img src="{{url_for('static', filename=city_image)}}" alt="Nature" style="width:100%">
+		          <div class="caption">
+		            <p>This is a filler caption. </p>
+		          </div>
+		        </a>
+		      </div>
+		    </div>
+		  </div>
+		
+
+
 		</div>
 		 
 	    {% from "includes/_formhelpers.html" import render_field %}
