@@ -103,16 +103,35 @@ def predict_all_attrib(city, date):
     for model, attrib in all_models:        
         predicted_attrib = model.predict(test_X)
         if attrib == 'temperature':
-        	predicted_attribs[attrib] = round(((float(predicted_attrib)*(9/5))-459.67), 3)
+        	as_str = str(round(((float(predicted_attrib)*(9/5))-459.67), 3)) + ' °F'
+        	predicted_attribs[attrib] = as_str
+        elif attrib == 'humidity':
+        	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' %'
+        elif attrib == 'pressure':
+        	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' hpa'
+        elif attrib == 'wind_direction':
+        	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' °'
+        elif attrib == 'wind_speed':
+        	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' m/h'
         else:
         	predicted_attribs[attrib] = round(float(predicted_attrib), 3)
+        
+
 
         # Index into the global attrib array
         attrib_index = attribs.index(attrib)
         
         true_attrib = get_today_attrib(city, date, attrib_dfs[attrib_index])
         if attrib == 'temperature':
-        	true_attribs[attrib] = round(((float(true_attrib)*(9/5))-459.67), 3)
+        	true_attribs[attrib] = str(round(((float(true_attrib)*(9/5))-459.67), 3)) + ' °F'
+        elif attrib == 'humidity':
+        	true_attribs[attrib] = str(round(float(true_attrib), 3)) + ' %'
+        elif attrib == 'pressure':
+        	true_attribs[attrib] = str(round(float(true_attrib), 3)) + ' hpa'
+        elif attrib == 'wind_direction':
+        	true_attribs[attrib] = str(round(float(true_attrib), 3)) + ' °'
+        elif attrib == 'wind_speed':
+        	true_attribs[attrib] = str(round(float(true_attrib), 3)) + ' m/h'
         else:
         	true_attribs[attrib] = round(float(true_attrib), 3)
       
