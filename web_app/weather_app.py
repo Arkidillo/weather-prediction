@@ -73,6 +73,23 @@ def get_datetime(date):
 def get_df_test_file(city):
     return pd.read_csv(test_dir + city + '_test.csv')
 
+
+def get_weather_description(value, temp):
+    desc_dict = {0: 'None', 1: 'Clear Sky', 1.5: 'Partially Cloudy', 2: 'Cloudy'}
+    rounded = int(round(value, 0))
+    
+    if rounded in desc_dict:
+        return desc_dict.get(rounded)
+    elif rounded == 3 and temp > 32:
+        return 'Light Rain'
+    elif rounded == 3 and temp <= 32: 
+            return 'Light Snow'
+    elif rounded == 4 and temp > 32:
+        return 'Heavy Rain'
+    elif rounded == 4 and temp <= 32: 
+        return 'Heavy Snow'
+
+
 # Predict all attributes given a date (as string) and city,
 # Returns: (prediction, true values)
 def predict_all_attrib(city, date):
@@ -103,8 +120,10 @@ def predict_all_attrib(city, date):
     for model, attrib in all_models:        
         predicted_attrib = model.predict(test_X)
         if attrib == 'temperature':
-        	as_str = str(round(((float(predicted_attrib)*(9/5))-459.67), 3)) + ' °F'
-        	predicted_attribs[attrib] = as_str
+        	temp = (round(((float(predicted_attrib)*(9/5))-459.67), 3))
+        	temp_string = str(temp)
+        	temp_str = temp_string + ' °F'
+        	predicted_attribs[attrib] = temp_str
         elif attrib == 'humidity':
         	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' %'
         elif attrib == 'pressure':
@@ -114,7 +133,8 @@ def predict_all_attrib(city, date):
         elif attrib == 'wind_speed':
         	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' m/h'
         else:
-        	predicted_attribs[attrib] = round(float(predicted_attrib), 3)
+        	desc = get_weather_description(round(float(predicted_attrib), 3), temp)
+        	predicted_attribs[attrib] = desc
         
 
 
@@ -123,7 +143,10 @@ def predict_all_attrib(city, date):
         
         true_attrib = get_today_attrib(city, date, attrib_dfs[attrib_index])
         if attrib == 'temperature':
-        	true_attribs[attrib] = str(round(((float(true_attrib)*(9/5))-459.67), 3)) + ' °F'
+        	temp = (round(((float(true_attrib)*(9/5))-459.67), 3))
+        	temp_string = str(temp)
+        	temp_str =  temp_string + ' °F'
+        	true_attribs[attrib] =  temp_str
         elif attrib == 'humidity':
         	true_attribs[attrib] = str(round(float(true_attrib), 3)) + ' %'
         elif attrib == 'pressure':
@@ -133,7 +156,8 @@ def predict_all_attrib(city, date):
         elif attrib == 'wind_speed':
         	true_attribs[attrib] = str(round(float(true_attrib), 3)) + ' m/h'
         else:
-        	true_attribs[attrib] = round(float(true_attrib), 3)
+        	desc = get_weather_description(round(float(true_attrib), 3), temp)
+        	true_attribs[attrib] = desc
       
     return [predicted_attribs, true_attribs]
 
