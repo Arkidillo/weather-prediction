@@ -178,7 +178,7 @@ def validate_date(date_text):
         date = datetime.strptime(date_text, '%Y-%m-%d')
         if date.year != 2017:
         	return 0
-        if date.month > 11:
+        if date.month > 10 or (date.month == 10 and date.day > 27):
         	return 0
     except ValueError:
         return 0
