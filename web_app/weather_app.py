@@ -76,8 +76,13 @@ def get_df_test_file(city):
 
 def get_weather_description(value, temp):
     desc_dict = {0: 'None', 1: 'Clear Sky', 1.5: 'Partially Cloudy', 2: 'Cloudy'}
-    rounded = int(round(value, 0))
+    print('this is the passed in temp value', temp)
+    if (value < 1.75  >= 1.25):
+    	rounded = 1.5
+    else:
+    	rounded = int(round(value, 0))
     
+
     if rounded in desc_dict:
         return desc_dict.get(rounded)
     elif rounded == 3 and temp > 32:
@@ -96,8 +101,9 @@ def predict_all_attrib(city, date):
     
     city_folder = models_folder + city + '/'
     
-    all_model_files = os.listdir(city_folder)
+    #all_model_files = os.listdir(city_folder)
     all_models = []
+    all_model_files = ['temperature.pkl', 'humidity.pkl', 'pressure.pkl', 'wind_direction.pkl', 'wind_speed.pkl', 'converted.pkl']
     for model_file in all_model_files:
         filename = city_folder + model_file
         all_models.append( ( pickle.load(open(filename, 'rb')) , model_file.rstrip('.pkl') ) )
@@ -120,10 +126,10 @@ def predict_all_attrib(city, date):
     for model, attrib in all_models:        
         predicted_attrib = model.predict(test_X)
         if attrib == 'temperature':
-        	temp = (round(((float(predicted_attrib)*(9/5))-459.67), 3))
-        	temp_string = str(temp)
-        	temp_str = temp_string + ' °F'
-        	predicted_attribs[attrib] = temp_str
+        	temp_p = (round(((float(predicted_attrib)*(9/5))-459.67), 3))
+        	temp_string_p = str(temp_p)
+        	temp_str_p = temp_string_p + ' °F'
+        	predicted_attribs[attrib] = temp_str_p
         elif attrib == 'humidity':
         	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' %'
         elif attrib == 'pressure':
@@ -133,7 +139,8 @@ def predict_all_attrib(city, date):
         elif attrib == 'wind_speed':
         	predicted_attribs[attrib] = str(round(float(predicted_attrib), 3)) + ' m/h'
         else:
-        	desc = get_weather_description(round(float(predicted_attrib), 3), temp)
+        	print('This is the predicted temperature', temp_p)
+        	desc = get_weather_description(round(float(predicted_attrib), 3), temp_p)
         	predicted_attribs[attrib] = desc
         
 
