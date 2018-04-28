@@ -200,12 +200,17 @@ def index():
 
 			if city in image_cities:
 				file = 'images/' + city + '.jpg'
+				table1 = 'images/' + city + ' Temp.jpg'
+				table2 = 'images/' + city + ' Combo.jpg'
+				table3 = 'images/' + city + ' Humidity.jpg'
+				all_images = [file, table1, table2, table3]
 			else:
 				file = 'images/default.jpg'
+				all_images = [file, file, file, file]
 			
 			results = predict_all_attrib(city, date)
 			
-			return render_template('submission.html', city = request.form['city'], date = request.form['date'], city_image = file, results = results)
+			return render_template('submission.html', city = request.form['city'], date = request.form['date'], all_images = all_images, results = results)
 		else:
 			return render_template('errorindex.html',  form=form)	
 	return render_template('index.html', form=form)
