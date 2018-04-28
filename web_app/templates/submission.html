@@ -4,7 +4,7 @@
 	<div class = "jumbotron text-center">
 		<h1>Predict the Weather in 2017</h1>
 	    <p class="lead">You chose {{city}} and {{date}}. </p> 
-	    <img src="{{url_for('static', filename=city_image)}}" width="400;" height="300;">
+	    <img src="{{url_for('static', filename=all_images[0])}}" width="400;" height="300;">
 	    
 	    
 		<br><br>
@@ -52,8 +52,8 @@
 			<div class="row">
 			    <div class="col-md-4">
 			      <div class="thumbnail">
-			        <a href="{{url_for('static', filename=city_image)}}" target="_blank">
-			          <img src="{{url_for('static', filename=city_image)}}" alt="Lights" style="width:100%">
+			        <a href="{{url_for('static', filename=all_images[1])}}" target="_blank">
+			          <img src="{{url_for('static', filename=all_images[1])}}" alt="Lights" style="width:100%">
 			          <div class="caption">
 			            <p>This is a filler caption. </p>
 			          </div>
@@ -62,8 +62,8 @@
 			    </div>
 		    <div class="col-md-4">
 		      <div class="thumbnail">
-		        <a href="{{url_for('static', filename=city_image)}}" target="_blank">
-		          <img src="{{url_for('static', filename=city_image)}}" alt="Nature" style="width:100%">
+		        <a href="{{url_for('static', filename=all_images[2])}}" target="_blank">
+		          <img src="{{url_for('static', filename=all_images[2])}}" alt="Nature" style="width:100%">
 		          <div class="caption">
 		            <p>This is a filler caption. </p>
 		          </div>
@@ -72,8 +72,8 @@
 		    </div>
 		    <div class="col-md-4">
 		      <div class="thumbnail">
-		        <a href="{{url_for('static', filename=city_image)}}" target="_blank">
-		          <img src="{{url_for('static', filename=city_image)}}" alt="Nature" style="width:100%">
+		        <a href="{{url_for('static', filename=all_images[3])}}" target="_blank">
+		          <img src="{{url_for('static', filename=all_images[3])}}" alt="Nature" style="width:100%">
 		          <div class="caption">
 		            <p>This is a filler caption. </p>
 		          </div>
